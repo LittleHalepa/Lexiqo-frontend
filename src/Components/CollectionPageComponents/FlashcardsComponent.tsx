@@ -41,9 +41,9 @@ export const Flashcards = ({cards, height, index, setIndex} : FlashcardsProps) =
     }
 
     return (
-        <div className="">
+        <div className="px-4 md:px-0">
             <div className="flex items-center justify-center">
-                <div className="w-full max-w-md">
+                <div className="w-full">
                     <div 
                     className="relative cursor-pointer "
                     onClick={handleRotateCard}

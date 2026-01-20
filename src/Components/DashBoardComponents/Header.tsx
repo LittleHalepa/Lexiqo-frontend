@@ -9,7 +9,7 @@ export default function HeaderComponent() {
     //TODO: Use user data to show profile picture and hotness score
 
     return (
-        <header className="flex fixed flex-col top-0 left-0 right-0 bg-white/70 backdrop-blur-md z-100">
+        <header className="flex fixed flex-col top-0 left-0 right-0 bg-white/70 backdrop-blur-md z-100 pb-9 md:pb-0">
             <div className="flex flex-row items-center justify-between w-full">
                 <div className="flex flex-row justify-center items-center">
                     <img src={logo} alt="Logo" width={60} className="translate-y-0.5"/>
@@ -17,7 +17,7 @@ export default function HeaderComponent() {
                 </div>
                 <div className="flex flex-row items-center gap-1.5 mr-2">
                     <div className="flex flex-row items-center gap-0.5 text-fire">
-                        <p className="font-semibold text-lg">5</p>
+                        <p className="font-semibold text-lg">0</p>
                         <i className='bx bxs-hot text-lg'></i>
                     </div>
                     <div className="">

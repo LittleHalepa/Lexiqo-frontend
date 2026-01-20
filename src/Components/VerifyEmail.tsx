@@ -14,7 +14,7 @@ export default function VerifyEmail() {
     const [isSending, setIsSending] = useState<number>(0);
 
     const nav = useNavigate();
-    const { user } = useUser();
+    const { user, setUser } = useUser();
 
     const iconRef = useRef<MailAnimatedIconRef>(null);
 
@@ -87,6 +87,7 @@ export default function VerifyEmail() {
                         const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/verify-code`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
+                            credentials: 'include',
                             body: JSON.stringify({ 
                             email: user?.email, 
                             code 
@@ -96,7 +97,15 @@ export default function VerifyEmail() {
 
                         if (!data.error) {
                             console.log('Email verified!');
-                            nav(`/user/${publicId}/dashboard`);
+
+                            if (user) {
+                                setUser({
+                                    ...user,
+                                    is_verified: true
+                                });
+                            }
+
+                            nav(`/user/${publicId}/dashboard/home`);
                         } else {
                             if (data.message === 'Invalid verification code') {
                                 setError('The code you entered is incorrect. Please try again.');

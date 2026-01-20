@@ -6,6 +6,7 @@ interface User {
     email: string;
     public_id: string;
     profile_picture: string;
+    is_verified?: boolean;
 }
 
 interface UserContextType {

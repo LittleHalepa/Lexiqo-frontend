@@ -78,7 +78,7 @@ export const FlashcardMode = () => {
                 <button className="ml-2 text-xs border shadow-sm hover:bg-gray-100 cursor-pointer rounded-lg px-2 py-1 border-[rgba(51,51,51,20%)] flex items-center gap-1" onClick={() => handleBackToCollection()}>
                     <i className='text-md translate-y-[0.05rem] bx bx-left-arrow-alt'></i> Back
                 </button>
-                <h2 className="absolute left-1/2 transform -translate-x-1/2 text-lg font-semibold">German 3</h2>
+                <h2 className="absolute left-1/2 transform -translate-x-1/2 text-lg font-semibold">{collection.name}</h2>
                 <div className="mr-2">
                     <button className="text-2xl" onClick={handleModesButtonClick}>
                         <i id="dropdown-icon" className='bx bx-chevron-down transition-all'></i>

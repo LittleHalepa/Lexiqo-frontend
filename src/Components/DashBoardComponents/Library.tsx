@@ -158,7 +158,7 @@ const Library = () => {
 
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         
         {Array.from({ length: numberOfSkeletons }).map((_, index) => (
           <div key={index} className="flex flex-col h-full gap-3 p-3 m-3 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200">
@@ -208,7 +208,7 @@ const Library = () => {
           <option value="least-cards" className="text-sm ">Least Cards</option>
         </select>
       </div>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 p-3 items-stretch lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 p-3 items-stretch lg:grid-cols-3 xl:grid-cols-4">
 
 
         {collections.map((collection, index) => (

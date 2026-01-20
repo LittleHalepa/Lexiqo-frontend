@@ -13,7 +13,7 @@ export const Modes = ({isLoading, collection} : any) => {
     }
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2 w-full">
             <div className={`flex flex-col items-center justify-center p-6 border border-gray-300 rounded-lg hover:shadow-sm cursor-pointer gap-2 transition-shadow ${isLoading ? 'bg-gray-200 animate-pulse' : 'bg-white animate-none'} transition-all`} onClick={handleFlashcardsButtonClick}>
                 <i className={`bx bxs-collection text-3xl ${isLoading ? 'text-gray-500' : 'text-black'}`}></i>
                 <h2 className={`font-semibold text-lg ${isLoading ? 'text-gray-500' : 'text-black'}`}>Flashcards</h2>

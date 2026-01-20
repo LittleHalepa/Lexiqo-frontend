@@ -8,6 +8,7 @@ import Bookmark from "../UI/BookmarkAnimation";
 const Home = () => {
 
   const [recentCollections, setRecentCollections] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
   const { user } = useUser();
@@ -17,14 +18,20 @@ const Home = () => {
   }
 
   useEffect(() => {
+    setIsLoading(true);
     sendRequest(`${import.meta.env.VITE_BACKEND_URL}/api/dashboard/get-recent-collections`, 'GET')
       .then((response) => {
         if (!response.error) {
           setRecentCollections(response.data);
         } else {
           console.error('Error fetching recent collections:', response.message);
-        } }).catch((error) => {
+        }
+      })
+      .catch((error) => {
         console.error('Network error fetching recent collections:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
@@ -42,13 +49,13 @@ const Home = () => {
   const skeletLenth = 5;
 
   return (
-    <div className="p-3 flex flex-col gap-6">
+    <div className="p-3 flex flex-col gap-6 m-auto">
       <div className="flex flex-col gap-3">
         <div>
           <h2 className="text-sm font-semibold">Recent</h2>
         </div>
         <div className="">
-          {recentCollections.length === 0 ? (
+          {isLoading ? (
             <div className="flex flex-col gap-3">
               {[...Array(skeletLenth)].map((_, index) => (
                 <div key={index} className="w-full h-15 bg-gray-200 rounded-md animate-pulse flex items-center justify-between"> 
@@ -65,6 +72,12 @@ const Home = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          ) : recentCollections.length === 0 ? (
+            <div className="w-full p-8 text-center border border-gray-200 rounded-md bg-gray-50">
+              <i className="bx bx-collection text-gray-400 text-4xl mb-2"></i>
+              <p className="text-gray-500 font-medium">No recent collections</p>
+              <p className="text-sm text-gray-400 mt-1">Your recently accessed collections will appear here</p>
             </div>
           ) : (
             <div className="flex flex-col gap-2">
@@ -96,22 +109,22 @@ const Home = () => {
               <FireAnimatedIcon size={60} />
             </div>
             <div className="flex flex-col ml-4 h-full justify-center">
-              <h3 className="text-fire font-bold text-xl">7 Days</h3>
+              <h3 className="text-fire font-bold text-xl">0 Days</h3>
               <p className="text-sm font-medium text-gray-500">Current streak</p>
             </div>
           </div>
           <div>
-            <div className="bg-gray-200 rounded-md px-3 py-1 mt-2">
-              <p className="text-sm text-black font-medium">Best: 14 days</p>
+            <div className="shadow-sm rounded-md px-3 py-1 mt-2">
+              <p className="text-sm text-brand font-medium">Best: 14 days</p>
             </div>
           </div>
         </div>
       </div>
       <div id="news" className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold">News</h2>
-        <div className="w-full flex flex-col md:flex-row  gap-4">
-          <iframe className="w-full h-55 rounded-md" src="https://www.youtube.com/embed/IpeJjQDXNAE?si=2854ItSsYb6IQFLf" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
-          <div className="h-55 w-full flex gap-1 flex-col justify-center items-center rounded-md bg-[#8B5CF6] text-white">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <iframe className="w-full h-55 sm:h-60 md:h-65 rounded-md" src="https://www.youtube.com/embed/IpeJjQDXNAE?si=2854ItSsYb6IQFLf" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+          <div className="h-55 sm:h-60 md:h-65 w-full flex gap-1 flex-col justify-center items-center rounded-md bg-[#8B5CF6] text-white">
             <h3 className="font-bold text-4xl">Lexiqo Plus</h3>
             <p className="font-medium text-sm">The most officiant way of studying!</p>
 

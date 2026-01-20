@@ -186,7 +186,7 @@ const AddCollection = () => {
   }
 
   return (
-    <div className="p-3 w-full flex flex-col gap-8 relative">
+    <div className="p-3 w-full flex flex-col gap-8 relative max-w-7xl m-auto">
       {message && (
         <div 
           id="message-element" 
@@ -200,21 +200,21 @@ const AddCollection = () => {
       <div>
         <div className="w-full flex flex-col gap-4 z-5">
           <div className="flex flex-col z-5">
-            <label htmlFor="title" className="font-semibold text-sm translate-y-0.5">Title</label>
-            <input type="text" id="title" className="bg-white shadow-sm py-1.5 px-3 text-xs font-medium border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all" placeholder="Enter collection title"/>
+            <label htmlFor="title" className="font-semibold text-sm md:text-base translate-y-0.5">Title</label>
+            <input type="text" id="title" className="bg-white shadow-sm py-1.5 px-3 text-sm font-medium border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all" placeholder="Enter collection title"/>
           </div>
           <div className="flex flex-col z-5">
-            <label htmlFor="description" className="font-semibold text-sm translate-y-0.5">Description</label>
-            <textarea id="description" className="bg-white shadow-sm py-1.5 px-3 text-xs font-medium border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all w-full h-32 resize-none" placeholder="Enter collection description"></textarea>
+            <label htmlFor="description" className="font-semibold text-sm md:text-base translate-y-0.5">Description</label>
+            <textarea id="description" className="bg-white shadow-sm py-1.5 px-3 text-sm font-medium border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all w-full h-32 resize-none" placeholder="Enter collection description"></textarea>
           </div>
         </div>
       </div>
 
-      <div className="w-full flex flex-row gap-3 cursor-pointer relative" onClick={handleShowColorPicker}>
-        <p className="font-semibold text-sm mb-2">Select color:</p>
-        <div className={`${selectedColor} h-4 translate-y-0.5 rounded-lg flex-1`}></div>
+      <div className="w-full flex flex-row gap-3 relative">
+        <p className="font-semibold md:text-base cursor-pointer whitespace-nowrap text-sm mb-2" onClick={handleShowColorPicker}>Select color:</p>
+        <div className={`${selectedColor} h-4 cursor-pointer translate-y-0.5 rounded-lg md:w-80 w-full`} onClick={handleShowColorPicker}></div>
 
-        <div id="picker" className="absolute right-0 top-1/1 gap-4 px-5 py-2 bg-gray-50 hidden rounded-md shadow-md z-15">
+        <div id="picker" className="absolute left-25 top-1/1 gap-4 px-5 py-2 bg-gray-50 hidden rounded-md shadow-md z-15">
           {colors.map((color) => (
             <div 
               key={color}
@@ -231,7 +231,7 @@ const AddCollection = () => {
       <hr className="text-gray-300" />
       <div className=""> 
         <div className="w-full flex items-center justify-between z-5">
-          <p className="font-semibold text-sm">Flashcards</p>
+          <p className="font-semibold md:text-base text-sm">Flashcards</p>
           <div className="flex items-center gap-3">
             <div className="bg-white shadow-sm relative p-4 rounded-md"><i className='bx bx-transfer-alt text-2xl absolute top-1 left-1'></i></div>
           </div>
@@ -245,38 +245,40 @@ const AddCollection = () => {
           ) : (
             <div className="w-full flex flex-col gap-4 z-5">
                 {flashcards.map((flashcard, index) => (
-                  <div key={index} id={`card-${index}`} className="w-full flex flex-col items-center gap-5 shadow-sm p-3 flashcard bg-white rounded-md appear-animation transition-all translate-y-0 z-5">
+                  <div key={index} id={`card-${index}`} className="w-full flex flex-col items-center gap-5 md:gap-8 shadow-sm p-3 flashcard bg-white rounded-md appear-animation transition-all translate-y-0 z-5">
                     <div className="w-full flex items-center justify-between">
-                      <p className="text-sm font-bold text-gray-500">{index + 1}</p>
+                      <p className="text-sm md:text-base font-bold text-gray-500">{index + 1}</p>
                       <div className="flex items-center">
-                        <i className='bx bx-trash text-xl text-gray-400 cursor-pointer active:text-red-500 transition-all' onClick={() => handleDeleteCard(index)}></i>
-                        <i className='bx bx-image-add text-2xl text-gray-400 cursor-pointer ml-4 translate-y-0.5'></i>
-                        <i className='bx bx-dots-vertical-rounded text-xl text-gray-400  cursor-pointer ml-3'></i>
+                        <i className='bx bx-trash text-xl md:text-2xl text-gray-400 cursor-pointer active:text-red-500 transition-all' onClick={() => handleDeleteCard(index)}></i>
+                        <i className='bx bx-image-add text-3xl text-gray-400 cursor-pointer ml-4 translate-y-0.5'></i>
+                        <i className='bx bx-dots-vertical-rounded text-2xl text-gray-400  cursor-pointer ml-3'></i>
                       </div>
                     </div>
-                    <div className="w-full flex flex-col gap-1 relative">
-                      <input type="text" id={`term-${index}`} value={flashcard.term} onFocus={() => {handleFocus("term", index, true)}} onBlur={() => handleFocus("term", index, false)} onChange={(e) => handleInputChange(index, "term", e.target.value)}
-                      className="bg-white shadow-sm py-1.5 px-3 text-xs font-medium border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all"/>
-                      <label htmlFor={`term-${index}`} className={`text-sm font-semibold text-gray-500 absolute left-3 transition-all duration-200
-                        ${
-                          focusStates.term[index] || flashcard.term.length > 0
-                            ? "top-[-10px] bg-white px-1 text-xs"
-                            : "top-1.5"
-                        }
-                      `}>Term</label>
-                    </div>
-                    <div className="w-full flex flex-col gap-1 relative">
-                      <input type="text" id={`definition-${index}`} className="bg-white shadow-sm py-1.5 px-3 text-xs font-medium border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all" value={flashcard.definition} onFocus={() => handleFocus("def", index, true)} onBlur={() => handleFocus("def", index, false)} onChange={(e) => handleInputChange(index, "definition", e.target.value)}/>
-                      <label htmlFor={`definition-${index}`} className={`text-sm font-semibold text-gray-500 absolute left-3 transition-all duration-200
-                        ${
-                          focusStates.def[index] || flashcard.definition.length > 0
-                            ? "top-[-10px] bg-white px-1 text-xs"
-                            : "top-1.5"
-                        }
-                      `}>Definition</label>
+                    <div className=" w-full flex flex-col md:flex-row gap-4 x-5">
+                      <div className="w-full flex flex-col gap-1 relative">
+                        <input type="text" id={`term-${index}`} value={flashcard.term} onFocus={() => {handleFocus("term", index, true)}} onBlur={() => handleFocus("term", index, false)} onChange={(e) => handleInputChange(index, "term", e.target.value)}
+                        className="bg-white shadow-sm py-1.5 px-3 text-sm md:text-base font-semibold border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all"/>
+                        <label htmlFor={`term-${index}`} className={`text-sm md:text-base font-semibold text-gray-500 absolute left-3 transition-all duration-200
+                          ${
+                            focusStates.term[index] || flashcard.term.length > 0
+                              ? "top-[-10px] bg-white px-1 text-xs md:text-sm"
+                              : "top-2"
+                          }
+                        `}>Term</label>
+                      </div>
+                      <div className="w-full flex flex-col gap-1 relative">
+                        <input type="text" id={`definition-${index}`} className="bg-white shadow-sm md:text-base py-1.5 px-3 text-sm font-semibold border-2 border-gray-200 outline-none rounded-md focus:border-[rgb(100,26,230)] transition-all" value={flashcard.definition} onFocus={() => handleFocus("def", index, true)} onBlur={() => handleFocus("def", index, false)} onChange={(e) => handleInputChange(index, "definition", e.target.value)}/>
+                        <label htmlFor={`definition-${index}`} className={`text-sm md:text-base font-semibold text-gray-500 absolute left-3 transition-all duration-200
+                          ${
+                            focusStates.def[index] || flashcard.definition.length > 0
+                              ? "top-[-10px] bg-white px-1 text-xs md:text-sm"
+                              : "top-2"
+                          }
+                        `}>Definition</label>
+                      </div>
                     </div>
                     <div className="w-full flex items-center justify-end">
-                      <i className='bx bx-plus text-xl text-gray-400 cursor-pointer' onClick={(event) => addNextCard(event)}></i>
+                      <i className='bx bx-plus text-xl md:text-2xl text-gray-400 cursor-pointer' onClick={(event) => addNextCard(event)}></i>
                     </div>
                   </div>
                 ))}
@@ -285,9 +287,9 @@ const AddCollection = () => {
         </div>
         <div className="flex flex-col justify-center mt-6 gap-4 z-5">
           <div className="flex items-center justify-end w-full">
-            <button className="text-white bg-brand py-1.5 px-4 rounded-md text-sm font-semibold" onClick={handleAddCard}>Add</button>
+            <button className="text-white cursor-pointer bg-brand md:px-8 py-1.5 px-4 pr-4 rounded-md text-sm font-semibold flex justify-center items-center" onClick={handleAddCard}>Add</button>
           </div>
-          <div className="flex flex-row gap-3 mt-6 items-center z-5">
+          <div className="flex flex-row gap-3 mt-6 items-center justify-center z-5">
             <button className={`text-sm text-black border cursor-pointer hover:bg-gray-100 border-[rgba(51,51,51,20%)] py-2 rounded-md px-5 font-semibold shadow-sm md:px-8 transition-all`}
             onClick={handleCreateCollection}>
                 {isCreating ? (
@@ -299,7 +301,7 @@ const AddCollection = () => {
                   "Create"
               }
             </button>
-            <button className="w-full bg-brand text-white py-2 cursor-pointer rounded-md font-semibold text-sm border border-[rgb(100,26,230)]">Create and Learn</button>
+            <button className="flex-1 md:flex-0 whitespace-nowrap px-10 bg-brand text-white py-2 cursor-pointer rounded-md font-semibold text-sm border border-[rgb(100,26,230)]">Create and Learn</button>
           </div>
         </div>
       </div>

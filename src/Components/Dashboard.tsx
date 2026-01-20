@@ -37,7 +37,7 @@ export default function Dashboard() {
     return (
         <div className="">
             {showHeader && <HeaderComponent/>}
-            <main className={`${showHeader ? 'pt-26' : 'pt-0'} ${showFooter ? 'pb-19' : 'pb-0'}`}>
+            <main className={`${showHeader ? 'pt-26 md:pt-13' : 'pt-0'} ${showFooter ? 'pb-19' : 'pb-0'} pl-0 md:pl-50 max-w-[115rem] m-auto`}>
                 { isLoading ? <div className="pt-40 text-center text-lg font-medium">Loading...</div> : <Outlet/> }
             </main>
             {showFooter && <Footer/>}
