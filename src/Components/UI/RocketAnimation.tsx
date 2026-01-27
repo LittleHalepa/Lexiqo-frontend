@@ -8,9 +8,9 @@ export interface RocketAnimatedIconRef {
   playAnimation: () => void;
 }
 
-interface RocketAnimatedIconProps {
-  size?: number;
-}
+// interface RocketAnimatedIconProps {
+//   size?: number;
+// }
 
 const RocketAnimatedIcon = forwardRef<RocketAnimatedIconRef, {}>(
   (_, ref) => {
