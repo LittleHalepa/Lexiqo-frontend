@@ -11,6 +11,9 @@ export default function Header() {
                 <img src={logo} alt="Lexiqo logo" width={45}/>
                 <h1 className="font-bold text-[1.2rem]">Lexiqo</h1>
             </div>
+            <p className="text-red-500 text-sm font-medium bg-red-50 px-3 py-1.5 rounded">
+                Server isn't running yet! Site is under construction.
+            </p>
             <button className="bg-white px-4 cursor-pointer hover:bg-gray-100 active:bg-gray-200 py-2 rounded transition-colors" onClick={() => navigate('/login')}>
                 Sign In
             </button>
